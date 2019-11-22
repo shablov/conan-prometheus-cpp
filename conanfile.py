@@ -12,7 +12,7 @@ class PrometheusCppConan(ConanFile):
     name = 'prometheus-cpp'
     version = '0.7.0'
     license = 'MIT'
-    url = 'https://github.com/steakhal/conan-prometheus-cpp'
+    url = 'https://github.com/shablov/conan-prometheus-cpp'
     homepage = 'https://github.com/jupp0r/prometheus-cpp'
     description = 'This library aims to enable Metrics-Driven Development for C++ services'
     topics = (
@@ -24,7 +24,7 @@ class PrometheusCppConan(ConanFile):
         'profile',
         'log',
     )
-    author = 'Balazs Benics <benicsbalazs@gmail.com>'
+    author = 'Dmitriy Shablov <dzmitriy.shablov@gmail.com>'
     settings = ('os', 'compiler', 'build_type', 'arch')
     options = {
         'shared': [True, False],
@@ -36,6 +36,7 @@ class PrometheusCppConan(ConanFile):
     default_options = {
         'shared': False,
         'fPIC': True,
+        'mode': 'pull',
         'enable_compression': True,
         'override_cxx_standard_flags': True,
     }
@@ -68,7 +69,7 @@ class PrometheusCppConan(ConanFile):
 
     def requirements(self):
         if self.options.mode == 'pull':
-            self.requires('civetweb/1.12@uilianries/stable')
+            self.requires('civetweb/1.11@conan-shablov/stable')
             if self.options.enable_compression:
                 self.requires.add('zlib/1.2.11@conan/stable')
         else:  # self.options.mode == 'push':
